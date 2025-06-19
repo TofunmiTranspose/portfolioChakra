@@ -23,6 +23,10 @@ import {
   defineConfig,
   defineTokens,
 } from "@chakra-ui/react";
+import { FaBurger } from "react-icons/fa6";
+import { CiBurger } from "react-icons/ci";
+import { MdOutlineMenu } from "react-icons/md";
+import { GiCancel } from "react-icons/gi";
 
 const customThemeConfig = defineConfig({
   theme: {
@@ -112,6 +116,8 @@ const mockEarnings = {
 // --- Main App Component ---
 function App() {
   const { isOpen, onToggle } = useDisclosure();
+  const [open, setOpen] = useState(false);
+  const toggleMenu = () => setOpen(!open);
   const [activeSection, setActiveSection] = useState("profile");
   const [isLargerThanMd] = useMediaQuery("(min-width: 48em)");
 
@@ -126,13 +132,29 @@ function App() {
   return (
     <ChakraProvider value={system}>
       {" "}
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        minH="100vh"
-        bg="primary.50"
-      >
+      <Flex direction={{ base: "column", md: "row" }} bg="primary.50">
+        <Flex
+          align="center"
+          md={{ display: "none" }}
+          justify="space-between"
+          bg="primary.900"
+          h={20}
+          p={4}
+        >
+          <Text fontSize="xl" fontWeight="bold" color="white">
+            MyPortfolio
+          </Text>
+          <Box>
+            <MdOutlineMenu
+              onClick={() => toggleMenu()}
+              size={30}
+              color="white"
+              cursor="pointer"
+            />
+          </Box>
+        </Flex>
         <Box
-          display={{ base: "block", md: "none" }}
+          display={{ base: open ? "block" : "none", md: "none" }}
           bg="primary.900"
           color="white"
           p={4}
@@ -143,18 +165,18 @@ function App() {
           shadow="md"
           borderBottomRadius="lg"
         >
-          <HStack justifyContent="space-between" alignItems="center">
+          <HStack justifyContent="space-between" py={2} alignItems="center">
             <Text fontSize="xl" fontWeight="bold">
               Dashboard
             </Text>
-            <IconButton
-              aria-label="Toggle navigation"
-              icon={isOpen ? <Text>✕</Text> : <Text>☰</Text>}
-              onClick={onToggle}
-              variant="unstyled"
-              color="white"
-              fontSize="2xl"
-            />
+            <Box fontWeight="thin">
+              <GiCancel
+                onClick={() => toggleMenu()}
+                size={30}
+                color="white"
+                cursor="pointer"
+              />
+            </Box>
           </HStack>
           <VStack as="nav" spacing={2} align="stretch" mt={4}>
             {sections.map((section) => (
@@ -235,7 +257,7 @@ function App() {
         <Box
           flex="1"
           p={{ base: 4, md: 8 }}
-          mt={{ base: "70px", md: "0" }}
+          mt={{ base: "20px", md: "0" }}
           overflowY="auto"
           bg="primary.50"
           color="gray.800"
