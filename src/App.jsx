@@ -77,13 +77,13 @@ const mockProjects = [
     id: 3,
     title: "Fullstack School Web App",
     description: "React, Tailwind CSS, Firebase",
-    image: "./src/assets/school.png",
+    image: "./src/assets/school.jpg",
   },
   {
     id: 4,
     title: "My Portfolio Website",
     description: "React, Tailwind CSS",
-    image: "./src/assets/portfolio.png",
+    image: "./src/assets/portfolio.jpg",
   },
 ];
 
@@ -190,7 +190,7 @@ function App() {
               borderRadius="full"
               boxSize="150px"
               mb={4}
-              src="../src/assets/pic.png" // Gold-accented placeholder
+              src="../src/assets/pic.jpg" // Gold-accented placeholder
               alt="Tofunmi Paul Okeowo"
               border="4px solid"
               borderColor="accent.gold"
